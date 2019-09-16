@@ -17,3 +17,8 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 **4)Histograma somente Produtos Energéticos**
 
 ![derivados unicamente energéticos](https://user-images.githubusercontent.com/48027825/64932788-c146c980-d817-11e9-838f-6fbedd7752d1.png)
+
+**5)Histograma somente Produtos Não Energéticos**
+
+
+![derivados unicamente não energéticos](https://user-images.githubusercontent.com/48027825/64932853-2c909b80-d818-11e9-9025-2026480a6c59.png)
