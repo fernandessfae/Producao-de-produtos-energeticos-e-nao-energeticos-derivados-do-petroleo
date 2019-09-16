@@ -26,3 +26,5 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 **6)Histograma Produção Total (Energéticos + Não Energéticos)**
 
 ![derivado energetico e nao energetico (total)](https://user-images.githubusercontent.com/48027825/64932897-682b6580-d818-11e9-8469-20127d20c22d.png)
+
+**7)Naive Bays e sua matriz de confusão**
