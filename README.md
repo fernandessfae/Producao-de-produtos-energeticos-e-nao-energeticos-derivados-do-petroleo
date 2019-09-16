@@ -12,4 +12,4 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 
 **3)Histograma Produtos Energéticos x Produtos não Energéticos**
 
-![derivado energetico X derivado nao energetico](https://user-images.githubusercontent.com/48027825/64916697-9fd2d880-d758-11e9-95d3-8ed072f46888.png)
+![derivado energetico X derivado nao energetico](https://user-images.githubusercontent.com/48027825/64932736-572e2480-d817-11e9-8b61-52d5cbe01d6e.png)
