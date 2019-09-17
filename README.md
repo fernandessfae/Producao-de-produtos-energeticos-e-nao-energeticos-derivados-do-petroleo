@@ -30,3 +30,15 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 **7)Naive Bays e sua matriz de confusão (Previsão máquina X Valor real)**
 
 ![matriz de confusao gaussianNB](https://user-images.githubusercontent.com/48027825/64994418-fb16df00-d8ae-11e9-9844-c7bb411eacc5.png)
+
+**8)Previsão de Produção de Produtos Energéticos (2019 - 2020)**
+
+![produtos energéticos (series temporais)](https://user-images.githubusercontent.com/48027825/65085519-c2493980-d984-11e9-8b08-14e3d7c2e4f4.png)
+
+**9)Previsão de Produção de Produtos Não-Energéticos (2019 - 2020)**
+
+![produtos não energéticos (series temporais)](https://user-images.githubusercontent.com/48027825/65085672-4c919d80-d985-11e9-8681-f29c661b518b.png)
+
+**10)Previsão de Produção de Produtos Energéticos e Não-Energéticos (2019 - 2020)**
+
+![produtos energéticos e não energéticos(series temporais)](https://user-images.githubusercontent.com/48027825/65085707-7d71d280-d985-11e9-9243-56d6eec475b0.png)
