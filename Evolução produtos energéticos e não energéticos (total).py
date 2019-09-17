@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 dados = pd.read_csv('D:\\Meus Documentos\\Downloads\\Banco de dados\\Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';')
 
 '''Agora faremos a separação anual dos produtos energéticos e não energéticos derivados do petróleo.
-   1) Faremos a separação dos energéticos e não energéticos usando uma lista para colocarmos num laço.
+   1) Faremos a soma dos produtos energéticos e não energéticos por ano usando uma lista para colocarmos num laço.
    2) Iremos ajustar os novos dataframes desmembrado do dataframe inicial
    3) Transformaremos as listas em novos dataframes
    4) Alteração nos nomes das colunas para o mesmo do dataframe inicial'''
