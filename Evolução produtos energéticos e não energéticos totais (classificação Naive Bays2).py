@@ -16,9 +16,9 @@ coluna_numerica_produtos = []
 #Aqui foi criado um laço para atribuir um número para cada tipo  do produto derivado do petróleo
 for index, column in dados.iterrows():
     if column['Tipo de Derivado'] == 'Energético':
-        coluna_numerica_produtos.append(0)
+        coluna_numerica_produtos.append('Energético')
     else:
-        coluna_numerica_produtos.append(1)
+        coluna_numerica_produtos.append('Não Energético')
 
 #Criaremos uma nova coluna 'Números dos derivados de petróleo' no dataframe 'dados'
 dados['Números dos tipos de derivados'] = coluna_numerica_produtos
@@ -54,7 +54,7 @@ taxa_acerto = accuracy_score(y_teste, previsoes)
 taxa_erro = 1 - taxa_acerto
 
 #Aqui irá gerá a figura da matriz de confusão (executar os 4 comandos simultaneamente)
-v = ConfusionMatrix(GaussianNB())
+v = ConfusionMatrix(naive_bayes)
 v.fit(X_treinamento, y_treinamento)
 v.score(X_teste, y_teste)
 v.poof()
