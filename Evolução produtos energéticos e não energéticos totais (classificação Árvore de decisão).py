@@ -4,6 +4,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import export_graphviz
+from yellowbrick.classifier import ConfusionMatrix
 
 '''Aqui vamos usar um método de classificação usando a Árvore de Decisão, para saber como o computador irá dizer qual o tipo de produto derivado do petróleo. '''
 
@@ -16,35 +17,35 @@ coluna_numerica_produtos = []
 #Aqui foi criado um laço para atribuir um número para cada produto derivado do petróleo
 for index, column in dados.iterrows():
     if column['Derivados de petróleo'] == 'Gasolina A ':
-        coluna_numerica_produtos.append(0)
+        coluna_numerica_produtos.append('Gasolina Aditivada')
     elif column['Derivados de petróleo'] == 'Gasolina de aviação':
-        coluna_numerica_produtos.append(1)
+        coluna_numerica_produtos.append('Gasolina de aviação')
     elif column['Derivados de petróleo'] == 'GLP1':
-        coluna_numerica_produtos.append(2)
+        coluna_numerica_produtos.append('GLP')
     elif column['Derivados de petróleo'] == 'Óleo combustível2,3':
-        coluna_numerica_produtos.append(3)
+        coluna_numerica_produtos.append('Óleo combustível')
     elif column['Derivados de petróleo'] == 'Óleo diesel3':
-        coluna_numerica_produtos.append(4)
+        coluna_numerica_produtos.append('Óleo diesel')
     elif column['Derivados de petróleo'] == 'QAV':
-        coluna_numerica_produtos.append(5)
+        coluna_numerica_produtos.append('QAV')
     elif column['Derivados de petróleo'] == 'Querosene iluminante':
-        coluna_numerica_produtos.append(6)
+        coluna_numerica_produtos.append('Querosene Iluminante')
     elif column['Derivados de petróleo'] == 'Outros4':
-        coluna_numerica_produtos.append(7)
+        coluna_numerica_produtos.append('Outros4')
     elif column['Derivados de petróleo'] == 'Asfalto':
-        coluna_numerica_produtos.append(8)
+        coluna_numerica_produtos.append('Asfalto')
     elif column['Derivados de petróleo'] == 'Coque5':
-        coluna_numerica_produtos.append(9)
+        coluna_numerica_produtos.append('Coque')
     elif column['Derivados de petróleo'] == 'Nafta6':
-        coluna_numerica_produtos.append(10)
+        coluna_numerica_produtos.append('Nafta')
     elif column['Derivados de petróleo'] == 'Óleo lubrificante ':
-        coluna_numerica_produtos.append(11)
+        coluna_numerica_produtos.append('Óleo lubrificante')
     elif column['Derivados de petróleo'] == 'Parafina':
-        coluna_numerica_produtos.append(12)
+        coluna_numerica_produtos.append('Parafina')
     elif column['Derivados de petróleo'] == 'Solvente':
-        coluna_numerica_produtos.append(13)
+        coluna_numerica_produtos.append('Solvente')
     elif column['Derivados de petróleo'] == 'Outros7':
-        coluna_numerica_produtos.append(14)
+        coluna_numerica_produtos.append('Outros7')
 
 #Criaremos uma nova coluna 'Números dos derivados de petróleo' no dataframe 'dados'
 dados['Números dos derivados de petróleo'] = coluna_numerica_produtos
@@ -61,7 +62,6 @@ classe = dados.iloc[:, 4].values
 #Aqui iremos transformar as colunas categóricas em colunas numéricas
 labelencoder = LabelEncoder()
 previsores[:, 0] = labelencoder.fit_transform(previsores[:, 0])
-previsores[:, 1] = labelencoder.fit_transform(previsores[:, 1])
 
 #Aqui hávera a divisão dos dados para treinamento e teste passando como parâmetros(variavel independente, variável resposta, a amostra de teste[0 até 1] e divisao da base de dados igual)
 X_treinamento, X_teste, y_treinamento, y_teste = train_test_split(previsores, classe, test_size = 0.22, random_state = 0)
@@ -82,6 +82,12 @@ confusao = confusion_matrix(y_teste, previsoes)
 #Gera duas variáveis com as taxas de acertos e erros da árvore de decisão
 taxa_acerto = accuracy_score(y_teste, previsoes)
 taxa_erro = 1 - taxa_acerto
+
+#Gera o imagem da matriz de confusão
+v = ConfusionMatrix(arvore)
+v.fit(X_treinamento, y_treinamento)
+v.score(X_teste, y_teste)
+v.poof()
 
 '''Obs: Para efeito de comparação, decidi ajustar o test_size para ver quais valores seriam melhor para o teste de predição da máquina, e o resultado foi esse:
     
