@@ -32,12 +32,15 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 ![naive bays](https://user-images.githubusercontent.com/48027825/65841541-cf0d4c00-e2f9-11e9-850a-830bc901da09.png)
 
 **8)Matriz de confusão com os tipos energéticos e não energéticos do petróleo (Naive Bays)**
+
 ![naive bays2](https://user-images.githubusercontent.com/48027825/65841574-227f9a00-e2fa-11e9-9a67-e2f93a0d4b14.png)
 
 **9)Matriz de confusão com os produtos derivados do petróleo (Árvore de decisão)**
+
 ![árvore de decisao](https://user-images.githubusercontent.com/48027825/65841580-30cdb600-e2fa-11e9-913a-63bd77f1dddb.png)
 
 **10)Matriz de confusão com os tipos energéticos e não energéticos do petróleo (Árvore de decisão)**
+
 ![árvore de decisao2](https://user-images.githubusercontent.com/48027825/65841586-48a53a00-e2fa-11e9-882a-22250c597b02.png)
 
 
