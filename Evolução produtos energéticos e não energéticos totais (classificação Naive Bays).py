@@ -43,6 +43,4 @@ v.fit(X_treinamento, y_treinamento)
 v.score(X_teste, y_teste)
 v.poof()
 
-'''Obs: Para efeito de comparação, decidi ajustar o test_size para ver quais valores seriam melhor para o teste de predição da máquina, e o resultado foi esse:
-    
-         Como constatado, a taxa de acerto foi 66.7%, aproximadamente, com 30% de dados para teste.'''
+'''Como constatado, a taxa de acerto do modelo foi 66.7%, aproximadamente, com 30% de dados para teste.'''
