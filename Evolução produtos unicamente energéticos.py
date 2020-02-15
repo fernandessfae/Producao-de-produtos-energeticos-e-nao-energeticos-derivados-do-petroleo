@@ -5,16 +5,9 @@ import numpy as np
 ''' Aqui vamos fazer um histograma com a produção de produtos unicamente energéticos derivados do petróleo entre os anos de 2009 a 2018, e fazer a sua comparação (isolados e juntos).
     Produtos energéticos - Gasolina Aditivada, Gasolina de aviação, GLP1(Gás Liquefeto de Petróleo), Óleo combustível, Óleo diesel, QAV(Querosene de Aviação), Querosene iluminante, Outros.'''
 
-#Carregamento da base de dados
-dados = pd.read_csv('D:\\Meus Documentos\\Downloads\\Banco de dados\\Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';')
+dados = pd.read_csv('Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';', decimal = ',')
 
-'''Agora faremos a separação dos produtos energéticos derivados do petróleo.
-   1) Faremos a separação dos energéticos e não energéticos usando uma lista para colocarmos num laço.
-   2) Iremos ajustar os novos dataframes desmembrado do dataframe inicial
-   3) Transformaremos as listas em novos dataframes
-   4) Alteração nos nomes das colunas para o mesmo do dataframe inicial'''
-
-# 1º Passo
+#Criação de uma lista para a separação de produtos energeticos derivado do petróleo
 gasolina_aditivada = []
 gasolina_aviacao = []
 glp = []
@@ -24,7 +17,6 @@ qi = []
 qav = []
 outros = []
 
-# 2º Passo
 for index, column in dados.iterrows():
     if column['Derivados de petróleo'] == 'Gasolina A ':
         gad = column['Tipo de Derivado'], column['Derivados de petróleo'], column['Ano'], column['Produção (m3)']
@@ -51,7 +43,7 @@ for index, column in dados.iterrows():
         ot = column['Tipo de Derivado'], column['Derivados de petróleo'], column['Ano'], column['Produção (m3)']
         outros.append(ot)
 
-# 3º Passo
+#Transformação das listas em dataframe
 gasolina_aditivada = pd.DataFrame(list(gasolina_aditivada))
 gasolina_aviacao = pd.DataFrame(list(gasolina_aviacao))
 glp = pd.DataFrame(list(glp))
@@ -61,7 +53,7 @@ qi = pd.DataFrame(list(qi))
 qav = pd.DataFrame(list(qav))
 outros = pd.DataFrame(list(outros))
 
-# 4º Passo
+#Renomeação das colunas dos dataframes recém-criados
 gasolina_aditivada.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
 gasolina_aviacao.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
 glp.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
@@ -70,16 +62,6 @@ oleo_diesel.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Pro
 qi.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
 qav.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
 outros.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-
-#Precisaremos fazer a transformação dos números da coluna 'produção (m³)' para o tipo float, pelo fato do python não reconhecer a ',' como elemento separador de número.
-gasolina_aditivada['Produção (m³)'] = gasolina_aditivada['Produção (m³)'].str.replace(",", ".").astype(float)
-gasolina_aviacao['Produção (m³)'] = gasolina_aviacao['Produção (m³)'].str.replace(",", ".").astype(float)
-glp['Produção (m³)'] = glp['Produção (m³)'].str.replace(",", ".").astype(float)
-oleo_combustivel['Produção (m³)'] = oleo_combustivel['Produção (m³)'].str.replace(",", ".").astype(float)  
-oleo_diesel['Produção (m³)'] = oleo_diesel['Produção (m³)'].str.replace(",", ".").astype(float)
-qi['Produção (m³)'] = qi['Produção (m³)'].str.replace(",", ".").astype(float)  
-qav['Produção (m³)'] = qav['Produção (m³)'].str.replace(",", ".").astype(float)
-outros['Produção (m³)'] = outros['Produção (m³)'].str.replace(",", ".").astype(float)
 
 #Plotando o gráfico da gasolina aditivada
 plt.bar(gasolina_aditivada.iloc[:, 2], gasolina_aditivada.iloc[:, 3], color = 'blue')
@@ -137,15 +119,6 @@ plt.xlabel('Produção Anual')
 plt.ylabel('Total Produção Anual (m³)')
 plt.title('Produção de outros produtos energéticos (2009 - 2018)')
 
-'''Explicando os parâmetros para explicar os gráficos acima:
-    xticks() - Com ele definimos as labels do eixo X, ele precisa de um parâmetro com tipo de array que determine as labels.
-    xlabel() e ylabel() - Com estes dois métodos adicionamos as labels do eixo Y e X, respectivamente.
-    title() - adiciona o título do gráfico.
-    plt.bar() - este método da lib plt, inicia a construsção do gráfico de barra, e aí começamos a passar os argumentos, que em ordem são:
-            x: As coordernadas das barras do eixo X, que no nosso caso são as faixas etárias;
-            height: A ‘altura’ das barras, valores que vão dimensionar as mesmas, no nosso caso o array de renda média;
-            color: Um argumento opicional que determina a cor das barras.'''
-
 #Plotando o gráfico comparando todos os produtos energéticos
 barWidth = 0.1
 plt.figure(figsize = (10, 5))
@@ -172,17 +145,3 @@ plt.title('Produção de produtos unicamente energéticos derivados do petróleo
 plt.legend(loc = 'best')
 plt.tight_layout()
 plt.show()
-
-'''Explicando os parâmetros para plotar o gráfico:
-   barwidth - dimensiona o tamanho da largura das barras.
-   plt.figure(figsize) - aumenta o gráfico para termos uma melhor visualização dos dados.
-   r1, r2, r3, r4, r5, r6, r7, r8 - Com estas variáveis é possível ter uma barra do lado
-   da outra, primeiramente é checada a largura da primeira barra e depois de forma incremental
-   se posicionam as outras, pela referência das larguras das anteriores.
-   bar() - Com este método que é construída a barra, com diferencial que adicionamos as variáveis
-   que representam as posições (r1,r2, r3, r4, r5, r6, r7, r8) como argumento, e também a largura das barras (barWidth).
-   xticks() - Embora já termos o utilizado para adicionar labels no eixo X, neste tipo de gráfico
-   há uma particularidade, há um for loop que distribui as legendas uniformemente em cada um dos grupos.
-   title() -  Adiciona o título do gráfico.
-   legend() - Cria uma legenda para o gráfico.
-   show() - Por fim, show mostra o gráfico na tela.'''   
