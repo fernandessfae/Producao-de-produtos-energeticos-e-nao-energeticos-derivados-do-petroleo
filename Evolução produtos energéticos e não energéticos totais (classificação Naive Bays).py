@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import confusion_matrix, accuracy_score
 from yellowbrick.classifier import ConfusionMatrix
 
@@ -18,6 +18,10 @@ classe = dados.iloc[:, 1].values
 #Aqui iremos transformar as colunas categóricas em colunas numéricas
 labelencoder = LabelEncoder()
 previsores[:, 0] = labelencoder.fit_transform(previsores[:, 0])
+
+#Fazendo a padronização dos atributos previsores
+scaler = StandardScaler()
+previsores = scaler.fit_transform(previsores)
 
 #Aqui hávera a divisão dos dados para treinamento e teste 
 X_treinamento, X_teste, y_treinamento, y_teste = train_test_split(previsores, classe, test_size = 0.3, random_state = 0)
@@ -36,10 +40,10 @@ confusao = confusion_matrix(y_teste, previsoes)
 taxa_acerto = accuracy_score(y_teste, previsoes)
 taxa_erro = 1 - taxa_acerto
 
-#Aqui irá gerá a figura da matriz de confusão (executar os 4 comandos simultaneamente)
+#Aqui irá gerá a figura da matriz de confusão 
 v = ConfusionMatrix(naive_bayes)
 v.fit(X_treinamento, y_treinamento)
 v.score(X_teste, y_teste)
 v.poof()
 
-'''Como constatado, a taxa de acerto do modelo foi 66.7%, aproximadamente, com 30% de dados para teste.'''
+'''Como constatado, a taxa de acerto do modelo foi 84.4%, aproximadamente, com 30% de dados para teste.'''
