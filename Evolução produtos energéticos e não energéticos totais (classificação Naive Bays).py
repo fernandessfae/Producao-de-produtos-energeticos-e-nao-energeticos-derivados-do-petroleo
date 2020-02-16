@@ -1,8 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix, accuracy_score
 from yellowbrick.classifier import ConfusionMatrix
 
@@ -17,8 +16,8 @@ previsores = dados.iloc[:, [0, 3]].values
 classe = dados.iloc[:, 1].values
 
 #Aqui iremos transformar as colunas categóricas em colunas numéricas
-onehotencoder = ColumnTransformer(transformers = [('OneHotEncoder', OneHotEncoder(), [0])], remainder = 'passthrough')
-previsores = onehotencoder.fit_transform(previsores)
+labelencoder = LabelEncoder()
+previsores[:, 0] = labelencoder.fit_transform(previsores[:, 0])
 
 #Aqui hávera a divisão dos dados para treinamento e teste 
 X_treinamento, X_teste, y_treinamento, y_teste = train_test_split(previsores, classe, test_size = 0.3, random_state = 0)
