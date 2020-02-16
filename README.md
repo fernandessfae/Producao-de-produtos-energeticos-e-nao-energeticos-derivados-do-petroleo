@@ -43,7 +43,11 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 
 ![árvore de decisao2](https://user-images.githubusercontent.com/48027825/65841586-48a53a00-e2fa-11e9-882a-22250c597b02.png)
 
-**11)Matriz de confusão com os tipos energéticos e não energéticos do petróleo (Regressão Logística)**
+**11)Matriz de confusão com os produtos derivados do petróleo (Regressão Logística)**
+
+![Figure_1](https://user-images.githubusercontent.com/48027825/74610436-08d8c680-50d2-11ea-9a79-5a9515b1a070.png)
+
+**12)Matriz de confusão com os tipos energéticos e não energéticos do petróleo (Regressão Logística)**
 
 ![Figure_1](https://user-images.githubusercontent.com/48027825/74610118-f9a44980-50ce-11ea-9a44-0bf599cf85e2.png)
 
