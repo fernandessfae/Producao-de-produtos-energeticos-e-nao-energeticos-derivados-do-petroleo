@@ -43,15 +43,18 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 
 ![árvore de decisao2](https://user-images.githubusercontent.com/48027825/65841586-48a53a00-e2fa-11e9-882a-22250c597b02.png)
 
+**11)Matriz de confusão com os tipos energéticos e não energéticos do petróleo (Regressão Logística)**
 
-**11)Previsão de Produção de Produtos Energéticos (2019 - 2020)**
+![Figure_1](https://user-images.githubusercontent.com/48027825/74609373-53eddc00-50c8-11ea-88c4-1c8809d93413.png)
+
+**Previsão de Produção de Produtos Energéticos (2019 - 2020)**
 
 ![produtos energéticos (series temporais)](https://user-images.githubusercontent.com/48027825/65085519-c2493980-d984-11e9-8b08-14e3d7c2e4f4.png)
 
-**12)Previsão de Produção de Produtos Não-Energéticos (2019 - 2020)**
+**Previsão de Produção de Produtos Não-Energéticos (2019 - 2020)**
 
 ![produtos não energéticos (series temporais)](https://user-images.githubusercontent.com/48027825/65085672-4c919d80-d985-11e9-8681-f29c661b518b.png)
 
-**13)Previsão de Produção de Produtos Energéticos e Não-Energéticos (2019 - 2020)**
+**Previsão de Produção de Produtos Energéticos e Não-Energéticos (2019 - 2020)**
 
 ![produtos energéticos e não energéticos(series temporais)](https://user-images.githubusercontent.com/48027825/65085707-7d71d280-d985-11e9-9243-56d6eec475b0.png)
