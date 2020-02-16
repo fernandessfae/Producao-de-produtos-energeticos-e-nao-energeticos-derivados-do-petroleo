@@ -59,6 +59,14 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 
 ![SVM2](https://user-images.githubusercontent.com/48027825/74611011-02991900-50d7-11ea-835c-3637e52375cc.png)
 
+**15)Matriz de confusão com os produtos derivados do petróleo (MLP)**
+
+![MLP](https://user-images.githubusercontent.com/48027825/74615137-aa750d80-50fc-11ea-83da-2c1bb7c63e9c.png)
+
+**16)Matriz de confusão com os tipos energéticos e não energéticos do petróleo (MLP)**
+
+![MLP2](https://user-images.githubusercontent.com/48027825/74615139-ab0da400-50fc-11ea-89f8-0af301664a83.png)
+
 **Previsão de Produção de Produtos Energéticos (2019 - 2020)**
 
 ![produtos energéticos (series temporais)](https://user-images.githubusercontent.com/48027825/65085519-c2493980-d984-11e9-8b08-14e3d7c2e4f4.png)
