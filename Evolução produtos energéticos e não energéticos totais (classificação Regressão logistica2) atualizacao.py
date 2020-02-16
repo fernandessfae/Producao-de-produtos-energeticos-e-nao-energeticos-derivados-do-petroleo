@@ -2,8 +2,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix, accuracy_score
-from sklearn.linear_model import LogisticRegression
 from yellowbrick.classifier import ConfusionMatrix
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
 
 '''Aqui vamos usar um método de classificação usando a Regressão Logística, para saber como o computador irá dizer qual o tipo energético de cada produto derivado do petróleo. '''
 
@@ -18,6 +19,10 @@ classe = dados.iloc[:, 0].values
 #Aqui iremos transformar as colunas categóricas em colunas numéricas
 labelencoder = LabelEncoder()
 previsores[:, 0] = labelencoder.fit_transform(previsores[:, 0])
+
+#Fazendo a padronização dos atributos previsores
+scaler = StandardScaler()
+previsores = scaler.fit_transform(previsores)
 
 #Aqui hávera a divisão dos dados para treinamento e teste
 X_treinamento, X_teste, y_treinamento, y_teste = train_test_split(previsores, classe, test_size = 0.3, random_state = 0)
@@ -39,4 +44,4 @@ v.fit(X_treinamento, y_treinamento)
 v.score(X_teste, y_teste)
 v.poof()
 
-'''Obs: Como constatado, a taxa de acerto do modelo foi 57.7%, aproximadamente, com 30% de dados para teste.'''
+'''Obs: Como constatado, a taxa de acerto do modelo foi 64.4%, aproximadamente, com 30% de dados para teste.'''
