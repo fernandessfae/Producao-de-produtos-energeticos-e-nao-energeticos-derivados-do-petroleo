@@ -31,5 +31,5 @@ classificador_tree.fit(previsores, classe)
 #Salvar os classificadores criados
 import pickle
 pickle.dump(classificador_naive, open('naive_salvo.sav', 'wb'))
-pickle.dump(classificador_tree, open('naive_tree.sav', 'wb'))
+pickle.dump(classificador_tree, open('tree_salvo.sav', 'wb'))
  
