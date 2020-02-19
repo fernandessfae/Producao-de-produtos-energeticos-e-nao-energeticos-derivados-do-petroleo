@@ -87,6 +87,10 @@ Link do banco de dados: http://dados.gov.br/dataset/g2-19-anest-2019-dist-perc-p
 
 ![Rplot](https://user-images.githubusercontent.com/48027825/74798455-89531f00-52ac-11ea-99fe-c27341a502d5.png)
 
+**Resultado da validação estatística para os modelos de machine learning (classificação tipos energéticos e não energéticos do petróleo)**
+
+![Rplot](https://user-images.githubusercontent.com/48027825/74802117-a80ae300-52b7-11ea-8d30-41277d68615d.png)
+
 **Previsão de Produção de Produtos Energéticos (2019 - 2020)**
 
 ![produtos energéticos (series temporais)](https://user-images.githubusercontent.com/48027825/65085519-c2493980-d984-11e9-8b08-14e3d7c2e4f4.png)
