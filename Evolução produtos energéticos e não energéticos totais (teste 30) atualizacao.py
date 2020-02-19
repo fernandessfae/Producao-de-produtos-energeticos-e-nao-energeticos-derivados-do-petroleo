@@ -11,6 +11,11 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
+''' O objetivo desse código é testar os modelos já treinados para a detecção de
+uma acurácia mais precisa, já que as separação de dados para treinamento e teste
+podem fazer uma divisão desbalanceada e comprometer o desempenho do modelo e/ou
+gerar uma falsa sensação de modelo ideal para aquela resolução de problema.'''
+
 dados = pd.read_csv('Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';', decimal = ',')
 
 #Criação de uma variável com variáveis independentes(x)
