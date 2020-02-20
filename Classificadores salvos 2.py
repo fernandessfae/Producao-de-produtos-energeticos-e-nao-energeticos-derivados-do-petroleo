@@ -35,6 +35,6 @@ classificador_forest.fit(previsores, classe)
 
 #Salvar os classificadores criados
 import pickle
-pickle.dump(classificador_knn, open('naive_knn2.sav', 'wb'))
-pickle.dump(classificador_tree, open('naive_tree2.sav', 'wb'))
-pickle.dump(classificador_forest, open('naive_forest2.sav', 'wb'))
+pickle.dump(classificador_knn, open('knn2_salvo.sav', 'wb'))
+pickle.dump(classificador_tree, open('tree2_salvo.sav', 'wb'))
+pickle.dump(classificador_forest, open('forest2_salvo.sav', 'wb'))
