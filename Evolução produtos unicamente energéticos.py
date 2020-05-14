@@ -2,22 +2,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-''' Aqui vamos fazer um histograma com a produção de produtos unicamente energéticos derivados do petróleo entre os anos de 2009 a 2018, e fazer a sua comparação (isolados e juntos).
-    Produtos energéticos - Gasolina Aditivada, Gasolina de aviação, GLP1(Gás Liquefeto de Petróleo), Óleo combustível, Óleo diesel, QAV(Querosene de Aviação), Querosene iluminante, Outros.'''
+''' Aqui vamos fazer um histograma com a produção de produtos unicamente energéticos derivados do petróleo entre os anos de 2009 a 2018, e fazer a sua comparação (isolados e juntos).'''
 
-dados = pd.read_csv('Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';', decimal = ',')
+energetico = pd.read_csv('Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';', decimal = ',')
 
 #Criação de uma lista para a separação de produtos energeticos derivado do petróleo
-gasolina_aditivada = []
-gasolina_aviacao = []
-glp = []
-oleo_combustivel = []
-oleo_diesel = []
-qi = []
-qav = []
-outros = []
+gasolina_aditivada, gasolina_aviacao, glp, oleo_combustivel, oleo_diesel, qi, qav, outros = ([] for i in range(8))
 
-for index, column in dados.iterrows():
+for index, column in energetico.iterrows():
     if column['Derivados de petróleo'] == 'Gasolina A ':
         gad = column['Tipo de Derivado'], column['Derivados de petróleo'], column['Ano'], column['Produção (m3)']
         gasolina_aditivada.append(gad)
@@ -43,85 +35,64 @@ for index, column in dados.iterrows():
         ot = column['Tipo de Derivado'], column['Derivados de petróleo'], column['Ano'], column['Produção (m3)']
         outros.append(ot)
 
-#Transformação das listas em dataframe
-gasolina_aditivada = pd.DataFrame(list(gasolina_aditivada))
-gasolina_aviacao = pd.DataFrame(list(gasolina_aviacao))
-glp = pd.DataFrame(list(glp))
-oleo_combustivel = pd.DataFrame(list(oleo_combustivel))
-oleo_diesel = pd.DataFrame(list(oleo_diesel))
-qi = pd.DataFrame(list(qi))
-qav = pd.DataFrame(list(qav))
-outros = pd.DataFrame(list(outros))
+#Criação de uma função para transformar as listas em dataframes
+def dataframe(x):
+    x = pd.DataFrame(list(x))
+    x.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
+    return x
 
-#Renomeação das colunas dos dataframes recém-criados
-gasolina_aditivada.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-gasolina_aviacao.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-glp.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-oleo_combustivel.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-oleo_diesel.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-qi.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-qav.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-outros.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
+gasolina_aditivada = dataframe(gasolina_aditivada)
+gasolina_aviacao = dataframe(gasolina_aviacao)
+glp = dataframe(glp)
+oleo_combustivel = dataframe(oleo_combustivel)
+oleo_diesel = dataframe(oleo_diesel)
+qi = dataframe(qi)
+qav = dataframe(qav)
+outros = dataframe(outros)
 
-#Plotando o gráfico da gasolina aditivada
-plt.bar(gasolina_aditivada.iloc[:, 2], gasolina_aditivada.iloc[:, 3], color = 'blue')
-plt.xticks(gasolina_aditivada['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (10^7 m³)')
-plt.title('Produção de gasolina aditivada (2009 - 2018)')
+#Criação de uma função para a plotagem dos histogramas dos produtos energéticos de petróleo
+def histograma(x):
+    plt.figure(figsize = (10, 5))
+    plt.xticks(x['Ano'])
+    plt.xlabel('Produção Anual')
+    plt.ylabel('Quantidade (m³)')
+    if x is gasolina_aditivada:
+        plt.title('Produção total de gasolina aditivada')
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'blue')
+    elif x is gasolina_aviacao:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'red')
+        plt.title('Produção total de gasolina de aviação')
+    elif x is glp:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'yellow')
+        plt.title('Produção total de gás liquefeto de petróleo - GLP')
+    elif x is oleo_combustivel:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'orange')
+        plt.title('Produção total de óleo de combustível')
+    elif x is oleo_diesel:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'green')
+        plt.title('Produção total de óleo diesel')
+    elif x is qi:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'brown')
+        plt.title('Produção total de querosene iluminante')
+    elif x is qav:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'purple')
+        plt.title('Produção total de querosene de aviação')
+    else:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'black')
+        plt.title('Produção total de outros produtos energéticos')
 
-#Plotando o gráfico da gasolina de aviação
-plt.bar(gasolina_aviacao.iloc[:, 2], gasolina_aviacao.iloc[:, 3], color = 'red')
-plt.xticks(gasolina_aviacao['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de gasolina de aviação (2009 - 2018)') 
-
-#Plotando o gráfico de gás liquefeto de petróleo (GLP)
-plt.bar(glp.iloc[:, 2], glp.iloc[:, 3], color = 'yellow')
-plt.xticks(glp['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (10^7 m³)')
-plt.title('Produção de gás liquefeto de petróleo - GLP (2009 - 2018)')
-
-#Plotando o gráfico de óleo de combustível
-plt.bar(oleo_combustivel.iloc[:, 2], oleo_combustivel.iloc[:, 3], color = 'orange')
-plt.xticks(oleo_combustivel['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (10^7 m³)')
-plt.title('Produção de óleo de combustível (2009 - 2018)') 
-
-#Plotando o gráfico de óleo diesel
-plt.bar(oleo_diesel.iloc[:, 2], oleo_diesel.iloc[:, 3], color = 'green')
-plt.xticks(oleo_diesel['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (10^7 m³)')
-plt.title('Produção de óleo de combustível (2009 - 2018)')
-
-#Plotando o gráfico de óleo de querosene iluminante
-plt.bar(qi.iloc[:, 2], qi.iloc[:, 3], color = 'brown')
-plt.xticks(qi['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de querosene iluminante (2009 - 2018)')
-
-#Plotando o gráfico de óleo de querosene de aviação
-plt.bar(qav.iloc[:, 2], qav.iloc[:, 3], color = 'black')
-plt.xticks(qav['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de querosene de aviação (2009 - 2018)')
-
-#Plotando o gráfico de outros produtos energéticos
-plt.bar(outros.iloc[:, 2], outros.iloc[:, 3], color = 'purple')
-plt.xticks(outros['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de outros produtos energéticos (2009 - 2018)')
+histograma(gasolina_aditivada)
+histograma(gasolina_aviacao)
+histograma(glp)
+histograma(oleo_combustivel)
+histograma(oleo_diesel)
+histograma(qi)
+histograma(qav)
+histograma(outros)
 
 #Plotando o gráfico comparando todos os produtos energéticos
 barWidth = 0.1
-plt.figure(figsize = (10, 5))
+plt.figure(figsize = (15, 5))
 r1 = np.arange(len(gasolina_aditivada.iloc[:, 2]))
 r2 = [x + barWidth for x in r1]
 r3 = [x + barWidth for x in r2]
@@ -140,8 +111,8 @@ plt.bar(r7, qav.iloc[:, 3], color = '#00BFFF', width = barWidth, label = 'Queros
 plt.bar(r8, outros.iloc[:, 3], color = '#87CEFA', width = barWidth, label = 'Outros Energéticos')
 plt.xlabel('Produção Anual')
 plt.xticks([r + barWidth for r in range(len(gasolina_aditivada.iloc[:, 3]))], gasolina_aditivada['Ano'])
-plt.ylabel('Total Produção Anual (10^7 m³)')
-plt.title('Produção de produtos unicamente energéticos derivados do petróleo (2009 - 2018)')
+plt.ylabel('Quantidade (m³)')
+plt.title('Produção de produtos unicamente energéticos derivados do petróleo')
 plt.legend(loc = 'best')
 plt.tight_layout()
 plt.show()
