@@ -2,19 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-''' Aqui vamos fazer um histograma com a produção de produtos unicamente não energéticos derivados do petróleo entre os anos de 2009 a 2018.
-    Produtos não energéticos - Asfalto, Coque, Nafta, Óleo Lubrificante, Parafina, Solvente, Outros.'''
+''' Aqui vamos fazer um histograma com a produção de produtos unicamente não energéticos derivados do petróleo entre os anos de 2009 a 2018.'''
 
 dados = pd.read_csv('Anuário Estatístico 2019 - Distribuição percentual da produção de derivados de petróleo não energéticos.csv', sep = ';', decimal = ',')
 
 # Separação dos produtos não energéticos
-asfalto = []
-coque = []
-nafta = []
-oleo_lubrificante = []
-parafina = []
-solvente = []
-outros = []
+asfalto, coque, nafta, oleo_lubrificante, parafina, solvente, outros = ([] for i in range(7))
 
 for index, column in dados.iterrows():
     if column['Derivados de petróleo'] == 'Asfalto':
@@ -39,76 +32,59 @@ for index, column in dados.iterrows():
         out = column['Tipo de Derivado'], column['Derivados de petróleo'], column['Ano'], column['Produção (m3)']
         outros.append(out)
 
-# Transformação das listas em dataframes
-asfalto = pd.DataFrame(list(asfalto))
-coque = pd.DataFrame(list(coque))
-nafta = pd.DataFrame(list(nafta))
-oleo_lubrificante = pd.DataFrame(list(oleo_lubrificante))
-parafina = pd.DataFrame(list(parafina))
-solvente = pd.DataFrame(list(solvente))
-outros = pd.DataFrame(list(outros))
+#Criação de uma função para transformar as listas em dataframes
+def dataframe(x):
+    x = pd.DataFrame(list(x))
+    x.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
+    return x
 
-# Renomeação das colunas das listas recém criadas
-asfalto.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-coque.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-nafta.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-oleo_lubrificante.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-parafina.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-solvente.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
-outros.columns = ['Tipo de Derivado', 'Derivados de petróleo', 'Ano', 'Produção (m³)']
+asfalto = dataframe(asfalto)
+coque = dataframe(coque)
+nafta = dataframe(nafta)
+oleo_lubrificante = dataframe(oleo_lubrificante)
+parafina = dataframe(parafina)
+solvente = dataframe(solvente)
+outros = dataframe(outros)
 
-#Plotando o gráfico do asfalto
-plt.bar(asfalto.iloc[:, 2], asfalto.iloc[:, 3], color = 'blue')
-plt.xticks(asfalto['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de asfalto (2009 - 2018)')
+#Criação de uma função para a plotagem dos histogramas dos produtos não energéticos de petróleo
+def histograma(x):
+    plt.figure(figsize = (10, 5))
+    plt.xticks(x['Ano'])
+    plt.xlabel('Produção Anual')
+    plt.ylabel('Quantidade (m³)')
+    if x is asfalto:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'blue')
+        plt.title('Produção total de asfalto')
+    elif x is coque:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'red')
+        plt.title('Produção total de coque')
+    elif x is nafta:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'yellow')
+        plt.title('Produção total de nafta')
+    elif x is oleo_lubrificante:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'orange')
+        plt.title('Produção total de óleo lubrificante')
+    elif x is parafina:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'green')
+        plt.title('Produção total de parafina')
+    elif x is solvente:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'brown')
+        plt.title('Produção total de solvente')
+    else:
+        plt.bar(x.iloc[:, 2], x.iloc[:, 3], color = 'purple')
+        plt.title('Produção total de outros produtos não energéticos')
 
-#Plotando o gráfico do coque
-plt.bar(coque.iloc[:, 2], coque.iloc[:, 3], color = 'red')
-plt.xticks(coque['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de coque (2009 - 2018)')
-
-#Plotando o gráfico da nafta
-plt.bar(nafta.iloc[:, 2], nafta.iloc[:, 3], color = 'yellow')
-plt.xticks(nafta['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de coque (2009 - 2018)')
-
-#Plotando o gráfico do óleo lubrificante
-plt.bar(oleo_lubrificante.iloc[:, 2], oleo_lubrificante.iloc[:, 3], color = 'orange')
-plt.xticks(oleo_lubrificante['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de coque (2009 - 2018)')
-
-#Plotando o gráfico da parafina
-plt.bar(parafina.iloc[:, 2], parafina.iloc[:, 3], color = 'green')
-plt.xticks(parafina['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de coque (2009 - 2018)')
-
-#Plotando o gráfico do solvente
-plt.bar(solvente.iloc[:, 2], solvente.iloc[:, 3], color = 'brown')
-plt.xticks(solvente['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de coque (2009 - 2018)')
-
-#Plotando o gráfico de outros não produtos energéticos
-plt.bar(outros.iloc[:, 2], outros.iloc[:, 3], color = 'purple')
-plt.xticks(outros['Ano'])
-plt.xlabel('Produção Anual')
-plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de outros produtos energéticos (2009 - 2018)')
+histograma(asfalto)
+histograma(coque)
+histograma(nafta)
+histograma(oleo_lubrificante)
+histograma(parafina)
+histograma(solvente)
+histograma(outros)
 
 #Plotando o gráfico comparando todos os produtos não energéticos
 barWidth = 0.1
-plt.figure(figsize = (10, 5))
+plt.figure(figsize = (15, 5))
 r1 = np.arange(len(asfalto.iloc[:, 2]))
 r2 = [x + barWidth for x in r1]
 r3 = [x + barWidth for x in r2]
@@ -122,11 +98,11 @@ plt.bar(r3, nafta.iloc[:, 3], color = '#40E0D0', width = barWidth, label = 'Naft
 plt.bar(r4, oleo_lubrificante.iloc[:, 3], color = '#48D1CC', width = barWidth, label = 'Óleo lubrificante')
 plt.bar(r5, parafina.iloc[:, 3], color = '#20B2AA', width = barWidth, label = 'Parafina')
 plt.bar(r6, solvente.iloc[:, 3], color = '#008B8B', width = barWidth, label = 'Solvente')
-plt.bar(r7, outros.iloc[:, 3], color = '#5F9EA0', width = barWidth, label = 'Outros Energéticos')
+plt.bar(r7, outros.iloc[:, 3], color = '#5F9EA0', width = barWidth, label = 'Outros Não Energéticos')
 plt.xlabel('Produção Anual')
 plt.xticks([r + barWidth for r in range(len(asfalto.iloc[:, 3]))], asfalto['Ano'])
 plt.ylabel('Total Produção Anual (m³)')
-plt.title('Produção de produtos unicamente não energéticos derivados do petróleo (2009 - 2018)')
+plt.title('Produção de produtos unicamente não energéticos derivados do petróleo')
 plt.legend(loc = 'best')
 plt.tight_layout()
 plt.show()
